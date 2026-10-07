@@ -17,25 +17,24 @@ def generate_document_view(request):
         details = request.POST.get('details', '')
 
         prompt = f"""
-        You are an advocate of the High Court of Kenya. 
-        Draft a legal document for a: {doc_type}.
-        First Party: {party_a}
-        Second Party: {party_b}
-        Terms & Details: {details}
-        
-        Ensure compliance with relevant Kenyan statutes (e.g. Employment Act 2007, Landlord & Tenant Act).
-        Format with clear numbered section headings and signature blocks at the bottom.
-        """
+You are an advocate of the High Court of Kenya.
+Draft a legal document for a: {doc_type}.
+First Party: {party_a}
+Second Party: {party_b}
+Terms & Details: {details}
 
-            client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+Ensure compliance with relevant Kenyan statutes (e.g. Employment Act 2007, Land Registration Act).
+Format with clear numbered section headings and signature blocks at the bottom.
+"""
+
+        client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
         try:
             ai_response = client.models.generate_content(
                 model='gemini-2.5-flash',
                 contents=prompt,
             )
             doc_text = ai_response.text
-        except Exception as e:
-            # Fallback document text if the AI model undergoes 503 capacity spikes
+        except Exception:
             doc_text = f"AGREEMENT FOR {doc_type.upper()}\n\nParties:\n1. {party_a}\n2. {party_b}\n\nTerms & Details:\n{details}\n\nThis agreement is made in accordance with the laws of Kenya."
             
 

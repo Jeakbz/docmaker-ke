@@ -1,5 +1,6 @@
 import io
 import os
+from django.urls import path
 from django.shortcuts import render
 from django.http import HttpResponse
 from google import genai
@@ -171,3 +172,8 @@ SECOND PARTY SIGNATURE: _________________    DATE: ______________
         return response
 
     return render(request, 'index.html')
+
+urlpatterns = [
+    path('', generate_document_view, name='generate_document'),
+        ]
+            

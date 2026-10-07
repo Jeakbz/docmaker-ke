@@ -8,6 +8,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-12345')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    'https://docmaker-ke.onrender.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

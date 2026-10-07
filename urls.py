@@ -27,13 +27,17 @@ def generate_document_view(request):
         Format with clear numbered section headings and signature blocks at the bottom.
         """
 
-        client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-        ai_response = client.models.generate_content(
-            model='gemini-3.8-flash',
-            contents=prompt,
-        )
-        
-        doc_text = ai_response.text
+            client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+        try:
+            ai_response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+            )
+            doc_text = ai_response.text
+        except Exception as e:
+            # Fallback document text if the AI model undergoes 503 capacity spikes
+            doc_text = f"AGREEMENT FOR {doc_type.upper()}\n\nParties:\n1. {party_a}\n2. {party_b}\n\nTerms & Details:\n{details}\n\nThis agreement is made in accordance with the laws of Kenya."
+            
 
         # Create PDF using ReportLab
         buffer = io.BytesIO()

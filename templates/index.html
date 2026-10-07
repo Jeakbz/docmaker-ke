@@ -12,6 +12,7 @@
         <p class="text-sm text-gray-600 mb-6">Generate legal contracts & agreements instantly in PDF format.</p>
         
         <form method="POST" action="" class="space-y-4">
+            {% csrf_token %}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Document Type</label>
                 <select name="doc_type" class="w-full mt-1 p-2 border border-gray-300 rounded-md">

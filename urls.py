@@ -34,9 +34,45 @@ Format with clear numbered section headings and signature blocks at the bottom.
                 contents=prompt,
             )
             doc_text = ai_response.text
-        except Exception:
-            doc_text = f"AGREEMENT FOR {doc_type.upper()}\n\nParties:\n1. {party_a}\n2. {party_b}\n\nTerms & Details:\n{details}\n\nThis agreement is made in accordance with the laws of Kenya."
-            
+                except Exception:
+            doc_text = f"""
+RESIDENTIAL TENANCY AGREEMENT
+
+THIS AGREEMENT is made this day between:
+
+1. THE LANDLORD: {party_a}
+2. THE TENANT: {party_b}
+
+1. PREMISES AND TERM
+The Landlord agrees to let and the Tenant agrees to take the residential property located in Kenya, subject to the terms and conditions outlined herein.
+
+2. RENT AND FINANCIAL OBLIGATIONS
+* Monthly Rent: KES {details} payable in advance on or before the 1st day of each calendar month.
+* Utilities: The Tenant shall be responsible for all utility payments including water, electricity, and garbage collection unless explicitly specified otherwise.
+
+3. TENANT COVENANTS
+* To keep the interior of the premises in good and clean condition.
+* Not to sublet or part with possession of the premises without prior written consent from the Landlord.
+* To permit the Landlord or authorized agents to enter and inspect the premises at reasonable times.
+
+4. LANDLORD COVENANTS
+* To keep the main structure and exterior of the building in good repair.
+* To ensure the Tenant enjoys quiet possession of the premises provided all covenants are fulfilled.
+
+5. TERMINATION
+Either party may terminate this agreement by providing a one (1) month written notice to the other party.
+
+IN WITNESS WHEREOF, the parties hereto have executed this Agreement:
+
+
+LANDLORD SIGNATURE: ____________________    DATE: ______________
+{party_a}
+
+
+TENANT SIGNATURE: ______________________    DATE: ______________
+{party_b}
+"""
+         
 
         # Create PDF using ReportLab
         buffer = io.BytesIO()
